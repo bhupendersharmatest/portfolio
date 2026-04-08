@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV Template Preview — Choose Your Design</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Calibri&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0F0F1A;
+      color: #E8E6F0;
+      padding: 40px 20px 80px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7C5CFC, #00D4AA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .page-header p { color: #7B7BAA; font-size: 0.95rem; }
+
+    /* ── COMBO WRAPPER ── */
+    .combo-section {
+      max-width: 960px;
+      margin: 0 auto 72px;
+    }
+    .combo-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .combo-tag {
+      background: linear-gradient(135deg, #7C5CFC, #5B3FD9);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 50px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .combo-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #E8E6F0;
+    }
+    .combo-subtitle { font-size: 0.82rem; color: #7B7BAA; margin-top: 2px; }
+    .combo-colors {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+      align-items: center;
+    }
+    .color-dot {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+      display: inline-block;
+      title: attr(title);
+    }
+
+    /* ── CV PAPER ── */
+    .cv-paper {
+      background: #FFFFFF;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+      color: #2C2C2C;
+      position: relative;
+    }
+
+
+    /* ══════════════════════════════════════
+       COMBO 1 — Navy & Gold
+    ══════════════════════════════════════ */
+    .c1-header {
+      background: #1B2A4A;
+      padding: 32px 36px 28px;
+      color: white;
+    }
+    .c1-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .c1-name {
+      font-size: 28pt;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .c1-title {
+      font-size: 12pt;
+      color: #B8C8E8;
+      margin-top: 5px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+    .c1-gold-line {
+      width: 48px; height: 3px;
+      background: #B8962E;
+      margin: 10px 0;
+      border-radius: 2px;
+    }
+    .c1-contact {
+      text-align: right;
+      font-size: 9.5pt;
+      color: #B8C8E8;
+      line-height: 1.9;
+    }
+    .c1-body { padding: 28px 36px; }
+    .c1-section-title {
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #B8962E;
+      border-bottom: 1.5px solid #B8962E;
+      padding-bottom: 5px;
+      margin: 20px 0 12px;
+    }
+    .c1-section-title:first-child { margin-top: 0; }
+    .c1-bio { font-size: 10pt; color: #444; line-height: 1.8; }
+    .c1-skill-row { margin-bottom: 7px; }
+    .c1-skill-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9.5pt;
+      margin-bottom: 3px;
+      color: #333;
+    }
+    .c1-skill-pct { color: #1B2A4A; font-weight: 600; }
+    .c1-bar { height: 5px; background: #E8ECF4; border-radius: 3px; }
+    .c1-bar-fill { height: 100%; background: #1B2A4A; border-radius: 3px; }
+    .c1-exp-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #F0F0F0; }
+    .c1-exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .c1-exp-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .c1-role { font-size: 11pt; font-weight: 700; color: #1B2A4A; }
+    .c1-duration {
+      font-size: 8.5pt; color: #1B2A4A;
+      background: #E8ECF4;
+      padding: 2px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .c1-company { font-size: 9.5pt; color: #B8962E; font-weight: 600; margin: 3px 0 8px; }
+    .c1-bullets { padding-left: 14px; }
+    .c1-bullets li { font-size: 9.5pt; color: #555; margin-bottom: 3px; line-height: 1.6; }
+    .c1-edu-item { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+    .c1-edu-icon { font-size: 22pt; }
+    .c1-edu-degree { font-size: 10.5pt; font-weight: 700; color: #1B2A4A; }
+    .c1-edu-inst { font-size: 9.5pt; color: #B8962E; font-weight: 600; margin: 2px 0; }
+    .c1-edu-meta { font-size: 8.5pt; color: #888; }
+
+
+    /* ══════════════════════════════════════
+       COMBO 2 — Slate Blue & Coral (Two-Column)
+    ══════════════════════════════════════ */
+    .c2-header { padding: 28px 36px 20px; border-bottom: 3px solid #E8613A; }
+    .c2-header-row { display: flex; justify-content: space-between; align-items: flex-end; }
+    .c2-name { font-size: 26pt; font-weight: 800; color: #2D5BE3; letter-spacing: -0.5px; }
+    .c2-title { font-size: 11pt; color: #555; margin-top: 3px; }
+    .c2-contact-row {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      font-size: 8.5pt; color: #666;
+      margin-top: 10px;
+    }
+    .c2-contact-row span { display: flex; align-items: center; gap: 4px; }
+    .c2-layout { display: flex; min-height: 400px; }
+    .c2-sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      background: #F0F4FF;
+      padding: 22px 18px;
+      border-right: 1px solid #E0E8FF;
+    }
+    .c2-main { flex: 1; padding: 22px 24px; }
+    .c2-sidebar-title {
+      font-size: 8.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #2D5BE3;
+      margin: 16px 0 10px;
+    }
+    .c2-sidebar-title:first-child { margin-top: 0; }
+    .c2-skill-item { margin-bottom: 9px; }
+    .c2-skill-name { font-size: 9pt; font-weight: 600; color: #333; margin-bottom: 3px; }
+    .c2-skill-track { height: 4px; background: #D0DCFF; border-radius: 2px; }
+    .c2-skill-fill { height: 100%; background: #2D5BE3; border-radius: 2px; }
+    .c2-contact-item { font-size: 8.5pt; color: #555; margin-bottom: 7px; display: flex; align-items: center; gap: 6px; }
+    .c2-contact-link { color: #2D5BE3; font-size: 8pt; word-break: break-all; }
+    .c2-section-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #2D5BE3;
+      border-bottom: 2px solid #E8613A;
+      padding-bottom: 5px;
+      margin: 16px 0 12px;
+    }
+    .c2-section-title:first-child { margin-top: 0; }
+    .c2-bio { font-size: 9.5pt; color: #444; line-height: 1.8; }
+    .c2-exp-item { margin-bottom: 14px; }
+    .c2-exp-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .c2-role { font-size: 10.5pt; font-weight: 700; color: #1A1A2E; }
+    .c2-badge {
+      font-size: 7.5pt; font-weight: 700;
+      background: #FFF0EB; color: #E8613A;
+      border: 1px solid #E8613A;
+      padding: 2px 8px; border-radius: 20px;
+    }
+    .c2-company { font-size: 9pt; color: #2D5BE3; font-weight: 600; margin: 3px 0 6px; }
+    .c2-duration-sm { font-size: 8.5pt; color: #888; }
+    .c2-bullets { padding-left: 14px; margin-top: 5px; }
+    .c2-bullets li { font-size: 9pt; color: #555; margin-bottom: 3px; line-height: 1.6; }
+    .c2-edu-item { display: flex; gap: 12px; margin-bottom: 12px; }
+    .c2-edu-icon { font-size: 20pt; }
+    .c2-edu-degree { font-size: 10pt; font-weight: 700; color: #1A1A2E; }
+    .c2-edu-inst { font-size: 9pt; color: #2D5BE3; font-weight: 600; margin: 2px 0; }
+    .c2-edu-meta { font-size: 8pt; color: #888; }
+
+
+    /* ══════════════════════════════════════
+       COMBO 3 — Charcoal & Emerald
+    ══════════════════════════════════════ */
+    .c3-header {
+      background: #2B2D42;
+      padding: 30px 36px;
+      color: white;
+    }
+    .c3-header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .c3-name { font-size: 26pt; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; }
+    .c3-title {
+      display: inline-block;
+      font-size: 10pt;
+      color: #1A936F;
+      font-weight: 600;
+      margin-top: 5px;
+      border-bottom: 1.5px solid #1A936F;
+      padding-bottom: 2px;
+    }
+    .c3-contact { text-align: right; font-size: 9pt; color: #B8C0D8; line-height: 2; }
+    .c3-body { padding: 26px 36px; }
+    .c3-section-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0 12px;
+      font-size: 10pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #1A936F;
+    }
+    .c3-section-line:first-child { margin-top: 0; }
+    .c3-section-line::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, #1A936F, #E8F5F1);
+      border-radius: 1px;
+    }
+    .c3-bio { font-size: 10pt; color: #444; line-height: 1.8; }
+    .c3-skill-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .c3-skill-name { font-size: 9.5pt; font-weight: 600; color: #2B2D42; width: 96px; flex-shrink: 0; }
+    .c3-bar { flex: 1; height: 5px; background: #E8F5F1; border-radius: 3px; }
+    .c3-bar-fill { height: 100%; background: #1A936F; border-radius: 3px; }
+    .c3-pct { font-size: 8.5pt; color: #1A936F; font-weight: 700; width: 34px; text-align: right; }
+    .c3-cat-label { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin: 12px 0 6px; }
+    .c3-exp-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #F0F0F0; }
+    .c3-exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .c3-exp-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .c3-role { font-size: 11pt; font-weight: 700; color: #2B2D42; }
+    .c3-duration {
+      font-size: 8.5pt; color: #1A936F;
+      background: #E8F5F1;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+    .c3-company { font-size: 9.5pt; color: #2B2D42; margin: 3px 0 8px; }
+    .c3-company span { color: #1A936F; font-weight: 600; }
+    .c3-bullets { padding-left: 14px; }
+    .c3-bullets li { font-size: 9.5pt; color: #555; margin-bottom: 3px; line-height: 1.6; }
+    .c3-bullets li::marker { color: #1A936F; }
+    .c3-edu-item { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+    .c3-edu-icon { font-size: 22pt; }
+    .c3-edu-degree { font-size: 10.5pt; font-weight: 700; color: #2B2D42; }
+    .c3-edu-inst { font-size: 9.5pt; color: #1A936F; font-weight: 600; margin: 2px 0; }
+    .c3-edu-meta { font-size: 8.5pt; color: #888; }
+    .c3-footer {
+      background: #2B2D42;
+      padding: 10px 36px;
+      text-align: center;
+      font-size: 8pt;
+      color: #6C6C80;
+    }
+
+
+    /* ══════════════════════════════════════
+       COMBO 4 — Deep Purple & Teal
+    ══════════════════════════════════════ */
+    .c4-header {
+      background: linear-gradient(135deg, #5B3FD9 0%, #4A2FC8 100%);
+      padding: 30px 36px;
+      color: white;
+    }
+    .c4-header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .c4-name { font-size: 26pt; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; line-height: 1.1; }
+    .c4-divider { width: 40px; height: 3px; background: #009E8C; margin: 8px 0; border-radius: 2px; }
+    .c4-title { font-size: 11pt; color: rgba(255,255,255,0.8); font-weight: 400; }
+    .c4-contact { text-align: right; font-size: 9pt; color: rgba(255,255,255,0.75); line-height: 2; }
+    .c4-body { padding: 26px 36px; }
+    .c4-section-title {
+      font-size: 10pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #5B3FD9;
+      padding-left: 12px;
+      border-left: 4px solid #009E8C;
+      margin: 18px 0 12px;
+    }
+    .c4-section-title:first-child { margin-top: 0; }
+    .c4-bio { font-size: 10pt; color: #444; line-height: 1.8; }
+    .c4-skills-table { width: 100%; border-collapse: collapse; }
+    .c4-skills-table td { padding: 5px 8px 5px 0; vertical-align: top; }
+    .c4-skill-cat {
+      font-size: 8.5pt; font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #5B3FD9;
+      white-space: nowrap;
+      padding-right: 14px !important;
+      border-right: 2px solid #E4E0FF;
+      border-bottom: none !important;
+    }
+    .c4-skill-items { font-size: 9.5pt; color: #333; padding-left: 14px !important; }
+    .c4-skill-item-pill {
+      display: inline-block;
+      background: #F0EEFF;
+      border: 1px solid #D8D0FF;
+      color: #5B3FD9;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 8.5pt;
+      font-weight: 600;
+      margin: 2px 3px 2px 0;
+    }
+    .c4-skill-pct { font-size: 7.5pt; color: #009E8C; font-weight: 700; }
+    .c4-exp-item { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #F0EEFF; }
+    .c4-exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .c4-exp-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .c4-role { font-size: 11pt; font-weight: 700; color: #1A1832; }
+    .c4-duration {
+      font-size: 8.5pt;
+      background: #F0EEFF;
+      color: #5B3FD9;
+      border: 1px solid #D8D0FF;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+    .c4-company { font-size: 9.5pt; color: #5B3FD9; font-weight: 600; margin: 3px 0 8px; }
+    .c4-bullets { padding-left: 14px; }
+    .c4-bullets li { font-size: 9.5pt; color: #555; margin-bottom: 3px; line-height: 1.6; }
+    .c4-bullets li::marker { color: #009E8C; }
+    .c4-edu-item { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+    .c4-edu-icon {
+      font-size: 22pt;
+      background: #F0EEFF;
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .c4-edu-degree { font-size: 10.5pt; font-weight: 700; color: #1A1832; }
+    .c4-edu-inst { font-size: 9.5pt; color: #5B3FD9; font-weight: 600; margin: 2px 0; }
+    .c4-edu-meta { font-size: 8.5pt; color: #888; }
+    .c4-footer {
+      background: linear-gradient(135deg, #5B3FD9, #4A2FC8);
+      padding: 10px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .c4-footer span { font-size: 8pt; color: rgba(255,255,255,0.5); }
+
+    /* ── CHOOSE BUTTON ── */
+    .choose-bar {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .choose-btn {
+      padding: 11px 32px;
+      border-radius: 50px;
+      border: 2px solid rgba(124,92,252,0.4);
+      background: rgba(124,92,252,0.1);
+      color: #A888FF;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: default;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── DIVIDER ── */
+    .combo-divider {
+      max-width: 960px;
+      margin: 0 auto 72px;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>CV Template Preview</h1>
+  <p>Review all 4 designs below — pick your favourite and share with the developer</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     COMBO 1 — Navy & Gold
+══════════════════════════════════════════ -->
+<div class="combo-section">
+  <div class="combo-label">
+    <span class="combo-tag">Combo 1</span>
+    <div>
+      <div class="combo-title">Navy &amp; Gold</div>
+      <div class="combo-subtitle">Corporate · MNC · Banking · ATS-Friendly</div>
+    </div>
+    <div class="combo-colors">
+      <span class="color-dot" style="background:#1B2A4A" title="Navy #1B2A4A"></span>
+      <span class="color-dot" style="background:#B8962E" title="Gold #B8962E"></span>
+      <span class="color-dot" style="background:#E8ECF4" title="Light Blue #E8ECF4"></span>
+    </div>
+  </div>
+
+  <div class="cv-paper">
+    <!-- Header -->
+    <div class="c1-header">
+      <div class="c1-header-top">
+        <div>
+          <div class="c1-name">Bhupender Sharma</div>
+          <div class="c1-gold-line"></div>
+          <div class="c1-title">Full Stack Developer &nbsp;·&nbsp; UI/UX Designer</div>
+        </div>
+        <div class="c1-contact">
+          📧 bhupender@email.com<br/>
+          📱 +91 98765 43210<br/>
+          📍 Mumbai, India
+        </div>
+      </div>
+    </div>
+
+    <div class="c1-body">
+      <!-- About -->
+      <div class="c1-section-title">Professional Summary</div>
+      <p class="c1-bio">I'm a passionate Full Stack Developer with 3+ years of experience building beautiful, functional web experiences. I specialise in modern JavaScript frameworks and clean, scalable code that users love.</p>
+
+      <!-- Skills -->
+      <div class="c1-section-title">Technical Skills</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 28px;">
+        <div class="c1-skill-row"><div class="c1-skill-meta"><span>HTML5</span><span class="c1-skill-pct">95%</span></div><div class="c1-bar"><div class="c1-bar-fill" style="width:95%"></div></div></div>
+        <div class="c1-skill-row"><div class="c1-skill-meta"><span>Node.js</span><span class="c1-skill-pct">80%</span></div><div class="c1-bar"><div class="c1-bar-fill" style="width:80%"></div></div></div>
+        <div class="c1-skill-row"><div class="c1-skill-meta"><span>CSS3</span><span class="c1-skill-pct">90%</span></div><div class="c1-bar"><div class="c1-bar-fill" style="width:90%"></div></div></div>
+        <div class="c1-skill-row"><div class="c1-skill-meta"><span>Python</span><span class="c1-skill-pct">75%</span></div><div class="c1-bar"><div class="c1-bar-fill" style="width:75%"></div></div></div>
+        <div class="c1-skill-row"><div class="c1-skill-meta"><span>React.js</span><span class="c1-skill-pct">85%</span></div><div class="c1-bar"><div class="c1-bar-fill" style="width:85%"></div></div></div>
+        <div class="c1-skill-row"><div class="c1-skill-meta"><span>MongoDB</span><span class="c1-skill-pct">78%</span></div><div class="c1-bar"><div class="c1-bar-fill" style="width:78%"></div></div></div>
+      </div>
+
+      <!-- Experience -->
+      <div class="c1-section-title">Work Experience</div>
+      <div class="c1-exp-item">
+        <div class="c1-exp-header">
+          <div class="c1-role">Senior Frontend Developer</div>
+          <div class="c1-duration">Jan 2023 – Present</div>
+        </div>
+        <div class="c1-company">Tech Corp Pvt Ltd &nbsp;·&nbsp; Mumbai, India &nbsp;·&nbsp; Full-time</div>
+        <ul class="c1-bullets">
+          <li>Led development of 5 major client projects using React and TypeScript</li>
+          <li>Improved page load performance by 40% through code splitting</li>
+          <li>Mentored 3 junior developers in best practices</li>
+        </ul>
+      </div>
+      <div class="c1-exp-item">
+        <div class="c1-exp-header">
+          <div class="c1-role">Full Stack Developer</div>
+          <div class="c1-duration">Jun 2021 – Dec 2022</div>
+        </div>
+        <div class="c1-company">StartupXYZ &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Full-time</div>
+        <ul class="c1-bullets">
+          <li>Built REST APIs with Node.js serving 10k+ daily users</li>
+          <li>Designed and implemented MongoDB database schemas</li>
+        </ul>
+      </div>
+
+      <!-- Education -->
+      <div class="c1-section-title">Education</div>
+      <div class="c1-edu-item">
+        <div class="c1-edu-icon">🎓</div>
+        <div>
+          <div class="c1-edu-degree">B.E. in Computer Engineering</div>
+          <div class="c1-edu-inst">University of Mumbai</div>
+          <div class="c1-edu-meta">📅 2018 – 2022 &nbsp;·&nbsp; 🏆 8.5 CGPA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="choose-bar"><div class="choose-btn">↑ Combo 1 — Navy &amp; Gold</div></div>
+</div>
+
+<hr class="combo-divider"/>
+
+
+<!-- ══════════════════════════════════════════
+     COMBO 2 — Slate Blue & Coral (Two-Column)
+══════════════════════════════════════════ -->
+<div class="combo-section">
+  <div class="combo-label">
+    <span class="combo-tag">Combo 2</span>
+    <div>
+      <div class="combo-title">Slate Blue &amp; Coral</div>
+      <div class="combo-subtitle">Two-Column · Creative Agencies · Startups</div>
+    </div>
+    <div class="combo-colors">
+      <span class="color-dot" style="background:#2D5BE3" title="Slate Blue #2D5BE3"></span>
+      <span class="color-dot" style="background:#E8613A" title="Coral #E8613A"></span>
+      <span class="color-dot" style="background:#F0F4FF" title="Light Blue #F0F4FF"></span>
+    </div>
+  </div>
+
+  <div class="cv-paper">
+    <!-- Header -->
+    <div class="c2-header">
+      <div class="c2-header-row">
+        <div>
+          <div class="c2-name">Bhupender Sharma</div>
+          <div class="c2-title">Full Stack Developer &nbsp;·&nbsp; UI/UX Designer</div>
+        </div>
+      </div>
+      <div class="c2-contact-row">
+        <span>📧 bhupender@email.com</span>
+        <span>📱 +91 98765 43210</span>
+        <span>📍 Mumbai, India</span>
+        <span>🐙 github.com/bhupender</span>
+        <span>💼 linkedin.com/in/bhupender</span>
+      </div>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="c2-layout">
+      <!-- Sidebar -->
+      <div class="c2-sidebar">
+        <div class="c2-sidebar-title">Skills</div>
+        <div class="c2-skill-item"><div class="c2-skill-name">HTML5</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:95%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">CSS3</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:90%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">React.js</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:85%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">Node.js</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:80%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">Python</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:75%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">MongoDB</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:78%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">Git</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:90%"></div></div></div>
+        <div class="c2-skill-item"><div class="c2-skill-name">Figma</div><div class="c2-skill-track"><div class="c2-skill-fill" style="width:80%"></div></div></div>
+
+        <div class="c2-sidebar-title">Contact</div>
+        <div class="c2-contact-item">📧 <span class="c2-contact-link">bhupender@email.com</span></div>
+        <div class="c2-contact-item">📱 +91 98765 43210</div>
+        <div class="c2-contact-item">📍 Mumbai, India</div>
+
+        <div class="c2-sidebar-title">Links</div>
+        <div class="c2-contact-item">🐙 <span class="c2-contact-link">github.com/bhupender</span></div>
+        <div class="c2-contact-item">💼 <span class="c2-contact-link">linkedin.com/in/bhupender</span></div>
+      </div>
+
+      <!-- Main -->
+      <div class="c2-main">
+        <div class="c2-section-title">About Me</div>
+        <p class="c2-bio">Passionate Full Stack Developer with 3+ years building beautiful, scalable web experiences. Specialise in React, Node.js and clean architecture.</p>
+
+        <div class="c2-section-title">Work Experience</div>
+        <div class="c2-exp-item">
+          <div class="c2-exp-top">
+            <div class="c2-role">Senior Frontend Developer</div>
+            <div class="c2-badge">Full-time</div>
+          </div>
+          <div class="c2-company">Tech Corp Pvt Ltd &nbsp;·&nbsp; Mumbai</div>
+          <div class="c2-duration-sm">📅 Jan 2023 – Present</div>
+          <ul class="c2-bullets">
+            <li>Led development of 5 major client projects</li>
+            <li>Improved page load performance by 40%</li>
+            <li>Mentored 3 junior developers</li>
+          </ul>
+        </div>
+        <div class="c2-exp-item">
+          <div class="c2-exp-top">
+            <div class="c2-role">Full Stack Developer</div>
+            <div class="c2-badge">Full-time</div>
+          </div>
+          <div class="c2-company">StartupXYZ &nbsp;·&nbsp; Remote</div>
+          <div class="c2-duration-sm">📅 Jun 2021 – Dec 2022</div>
+          <ul class="c2-bullets">
+            <li>Built REST APIs serving 10k+ daily users</li>
+            <li>Implemented MongoDB database schemas</li>
+          </ul>
+        </div>
+
+        <div class="c2-section-title">Education</div>
+        <div class="c2-edu-item">
+          <div class="c2-edu-icon">🎓</div>
+          <div>
+            <div class="c2-edu-degree">B.E. in Computer Engineering</div>
+            <div class="c2-edu-inst">University of Mumbai</div>
+            <div class="c2-edu-meta">📅 2018–2022 &nbsp;·&nbsp; 🏆 8.5 CGPA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="choose-bar"><div class="choose-btn">↑ Combo 2 — Slate Blue &amp; Coral</div></div>
+</div>
+
+<hr class="combo-divider"/>
+
+
+<!-- ══════════════════════════════════════════
+     COMBO 3 — Charcoal & Emerald
+══════════════════════════════════════════ -->
+<div class="combo-section">
+  <div class="combo-label">
+    <span class="combo-tag">Combo 3</span>
+    <div>
+      <div class="combo-title">Charcoal &amp; Emerald</div>
+      <div class="combo-subtitle">Tech · Product · Engineering Roles</div>
+    </div>
+    <div class="combo-colors">
+      <span class="color-dot" style="background:#2B2D42" title="Charcoal #2B2D42"></span>
+      <span class="color-dot" style="background:#1A936F" title="Emerald #1A936F"></span>
+      <span class="color-dot" style="background:#E8F5F1" title="Mint BG #E8F5F1"></span>
+    </div>
+  </div>
+
+  <div class="cv-paper">
+    <div class="c3-header">
+      <div class="c3-header-inner">
+        <div>
+          <div class="c3-name">Bhupender Sharma</div>
+          <div class="c3-title">Full Stack Developer &nbsp;·&nbsp; UI/UX Designer</div>
+        </div>
+        <div class="c3-contact">
+          📧 bhupender@email.com<br/>
+          📱 +91 98765 43210<br/>
+          📍 Mumbai, India
+        </div>
+      </div>
+    </div>
+
+    <div class="c3-body">
+      <div class="c3-section-line">Professional Summary</div>
+      <p class="c3-bio">Passionate Full Stack Developer with 3+ years of experience building beautiful, functional web experiences. I specialise in modern JavaScript frameworks and clean, scalable code that users love.</p>
+
+      <div class="c3-section-line">Technical Skills</div>
+      <div class="c3-cat-label">Frontend</div>
+      <div class="c3-skill-row"><div class="c3-skill-name">HTML5</div><div class="c3-bar"><div class="c3-bar-fill" style="width:95%"></div></div><div class="c3-pct">95%</div></div>
+      <div class="c3-skill-row"><div class="c3-skill-name">CSS3</div><div class="c3-bar"><div class="c3-bar-fill" style="width:90%"></div></div><div class="c3-pct">90%</div></div>
+      <div class="c3-skill-row"><div class="c3-skill-name">React.js</div><div class="c3-bar"><div class="c3-bar-fill" style="width:85%"></div></div><div class="c3-pct">85%</div></div>
+      <div class="c3-cat-label">Backend</div>
+      <div class="c3-skill-row"><div class="c3-skill-name">Node.js</div><div class="c3-bar"><div class="c3-bar-fill" style="width:80%"></div></div><div class="c3-pct">80%</div></div>
+      <div class="c3-skill-row"><div class="c3-skill-name">Python</div><div class="c3-bar"><div class="c3-bar-fill" style="width:75%"></div></div><div class="c3-pct">75%</div></div>
+
+      <div class="c3-section-line">Work Experience</div>
+      <div class="c3-exp-item">
+        <div class="c3-exp-header">
+          <div class="c3-role">Senior Frontend Developer</div>
+          <div class="c3-duration">Jan 2023 – Present</div>
+        </div>
+        <div class="c3-company"><span>Tech Corp Pvt Ltd</span> &nbsp;·&nbsp; Mumbai, India &nbsp;·&nbsp; Full-time</div>
+        <ul class="c3-bullets">
+          <li>Led development of 5 major client projects using React and TypeScript</li>
+          <li>Improved page load performance by 40% through code splitting</li>
+          <li>Mentored 3 junior developers in best practices</li>
+        </ul>
+      </div>
+      <div class="c3-exp-item">
+        <div class="c3-exp-header">
+          <div class="c3-role">Full Stack Developer</div>
+          <div class="c3-duration">Jun 2021 – Dec 2022</div>
+        </div>
+        <div class="c3-company"><span>StartupXYZ</span> &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Full-time</div>
+        <ul class="c3-bullets">
+          <li>Built REST APIs with Node.js serving 10k+ daily users</li>
+          <li>Designed and implemented MongoDB database schemas</li>
+        </ul>
+      </div>
+
+      <div class="c3-section-line">Education</div>
+      <div class="c3-edu-item">
+        <div class="c3-edu-icon">🎓</div>
+        <div>
+          <div class="c3-edu-degree">B.E. in Computer Engineering</div>
+          <div class="c3-edu-inst">University of Mumbai</div>
+          <div class="c3-edu-meta">📅 2018 – 2022 &nbsp;·&nbsp; 🏆 8.5 CGPA</div>
+        </div>
+      </div>
+    </div>
+    <div class="c3-footer">Generated from portfolio · April 2026</div>
+  </div>
+  <div class="choose-bar"><div class="choose-btn">↑ Combo 3 — Charcoal &amp; Emerald</div></div>
+</div>
+
+<hr class="combo-divider"/>
+
+
+<!-- ══════════════════════════════════════════
+     COMBO 4 — Deep Purple & Teal
+══════════════════════════════════════════ -->
+<div class="combo-section">
+  <div class="combo-label">
+    <span class="combo-tag">Combo 4</span>
+    <div>
+      <div class="combo-title">Deep Purple &amp; Teal</div>
+      <div class="combo-subtitle">Matches Portfolio Theme · Modern · Versatile</div>
+    </div>
+    <div class="combo-colors">
+      <span class="color-dot" style="background:#5B3FD9" title="Deep Purple #5B3FD9"></span>
+      <span class="color-dot" style="background:#009E8C" title="Teal #009E8C"></span>
+      <span class="color-dot" style="background:#F0EEFF" title="Lavender #F0EEFF"></span>
+    </div>
+  </div>
+
+  <div class="cv-paper">
+    <div class="c4-header">
+      <div class="c4-header-inner">
+        <div>
+          <div class="c4-name">Bhupender Sharma</div>
+          <div class="c4-divider"></div>
+          <div class="c4-title">Full Stack Developer &nbsp;·&nbsp; UI/UX Designer</div>
+        </div>
+        <div class="c4-contact">
+          📧 bhupender@email.com<br/>
+          📱 +91 98765 43210<br/>
+          📍 Mumbai, India<br/>
+          🐙 github.com/bhupender
+        </div>
+      </div>
+    </div>
+
+    <div class="c4-body">
+      <div class="c4-section-title">Professional Summary</div>
+      <p class="c4-bio">Passionate Full Stack Developer with 3+ years of experience building beautiful, functional web experiences. Specialise in modern JavaScript frameworks and clean, scalable architecture.</p>
+
+      <div class="c4-section-title">Technical Skills</div>
+      <table class="c4-skills-table">
+        <tr>
+          <td class="c4-skill-cat">Frontend</td>
+          <td class="c4-skill-items">
+            <span class="c4-skill-item-pill">HTML5 <span class="c4-skill-pct">95%</span></span>
+            <span class="c4-skill-item-pill">CSS3 <span class="c4-skill-pct">90%</span></span>
+            <span class="c4-skill-item-pill">React.js <span class="c4-skill-pct">85%</span></span>
+            <span class="c4-skill-item-pill">JavaScript <span class="c4-skill-pct">88%</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="c4-skill-cat">Backend</td>
+          <td class="c4-skill-items">
+            <span class="c4-skill-item-pill">Node.js <span class="c4-skill-pct">80%</span></span>
+            <span class="c4-skill-item-pill">Python <span class="c4-skill-pct">75%</span></span>
+            <span class="c4-skill-item-pill">MongoDB <span class="c4-skill-pct">78%</span></span>
+            <span class="c4-skill-item-pill">SQL <span class="c4-skill-pct">72%</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td class="c4-skill-cat">Tools</td>
+          <td class="c4-skill-items">
+            <span class="c4-skill-item-pill">Git <span class="c4-skill-pct">90%</span></span>
+            <span class="c4-skill-item-pill">Figma <span class="c4-skill-pct">80%</span></span>
+            <span class="c4-skill-item-pill">Docker <span class="c4-skill-pct">65%</span></span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="c4-section-title">Work Experience</div>
+      <div class="c4-exp-item">
+        <div class="c4-exp-header">
+          <div class="c4-role">Senior Frontend Developer</div>
+          <div class="c4-duration">Jan 2023 – Present</div>
+        </div>
+        <div class="c4-company">Tech Corp Pvt Ltd &nbsp;·&nbsp; Mumbai, India &nbsp;·&nbsp; Full-time</div>
+        <ul class="c4-bullets">
+          <li>Led development of 5 major client projects using React and TypeScript</li>
+          <li>Improved page load performance by 40% through code splitting</li>
+          <li>Mentored 3 junior developers in best practices</li>
+        </ul>
+      </div>
+      <div class="c4-exp-item">
+        <div class="c4-exp-header">
+          <div class="c4-role">Full Stack Developer</div>
+          <div class="c4-duration">Jun 2021 – Dec 2022</div>
+        </div>
+        <div class="c4-company">StartupXYZ &nbsp;·&nbsp; Remote &nbsp;·&nbsp; Full-time</div>
+        <ul class="c4-bullets">
+          <li>Built REST APIs with Node.js serving 10k+ daily users</li>
+          <li>Designed and implemented MongoDB database schemas</li>
+        </ul>
+      </div>
+
+      <div class="c4-section-title">Education</div>
+      <div class="c4-edu-item">
+        <div class="c4-edu-icon">🎓</div>
+        <div>
+          <div class="c4-edu-degree">B.E. in Computer Engineering</div>
+          <div class="c4-edu-inst">University of Mumbai</div>
+          <div class="c4-edu-meta">📅 2018 – 2022 &nbsp;·&nbsp; 🏆 8.5 CGPA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c4-footer">
+      <span>Bhupender Sharma — Portfolio CV</span>
+      <span>Generated · April 2026</span>
+    </div>
+  </div>
+  <div class="choose-bar"><div class="choose-btn">↑ Combo 4 — Deep Purple &amp; Teal</div></div>
+</div>
+
+</body>
+</html>

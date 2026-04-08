@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── CURSOR GLOW ── -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ══════════════════════════════════
+     NAVBAR
+══════════════════════════════════ -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo" id="navLogo">Dev</a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#about"        class="nav-link">About</a>
+      <a href="#skills"       class="nav-link">Skills</a>
+      <a href="#projects"     class="nav-link">Projects</a>
+      <a href="#experience"   class="nav-link">Experience</a>
+      <a href="#education"    class="nav-link">Education</a>
+      <a href="#contact"      class="nav-link">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="mode-toggle" id="modeToggle" title="Toggle theme" onclick="handleModeToggle()">🌙</button>
+      <a href="#contact" class="btn-hire" id="hireBtn">Hire Me</a>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="closeMobileMenu()">About</a>
+  <a href="#skills"     onclick="closeMobileMenu()">Skills</a>
+  <a href="#projects"   onclick="closeMobileMenu()">Projects</a>
+  <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+  <a href="#education"  onclick="closeMobileMenu()">Education</a>
+  <a href="#contact"    onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <p class="hero-greeting">👋 Hello, I'm</p>
+    <h1 class="hero-name" id="heroName">Your Name</h1>
+    <div class="hero-role">
+      <span class="role-prefix">I'm a </span>
+      <span class="typewriter" id="typewriter"></span>
+      <span class="cursor-blink">|</span>
+    </div>
+    <p class="hero-bio" id="heroBio">Passionate developer building beautiful digital experiences.</p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary" id="cvBtn">📄 Download CV (.doc)</a>
+      <a href="#projects" class="btn-outline">View My Work →</a>
+    </div>
+    <div class="hero-socials" id="heroSocials"></div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="hero-avatar" id="heroAvatar">
+        <span id="avatarInitials">YN</span>
+        <img id="avatarImg" src="" alt="Profile" style="display:none"/>
+      </div>
+      <div class="availability-badge">
+        <span class="pulse-dot"></span>
+        Available for work
+      </div>
+    </div>
+    <div class="hero-stats" id="heroStats"></div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll Down</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ABOUT
+══════════════════════════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">Who I Am</span>
+      <h2>About <span>Me</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="about-photo" id="aboutPhoto">
+          <span id="aboutInitials">YN</span>
+          <img id="aboutImg" src="" alt="Profile" style="display:none"/>
+        </div>
+        <div class="about-photo-deco"></div>
+      </div>
+      <div class="about-text reveal">
+        <h3 id="aboutTitle">Full Stack Developer</h3>
+        <p id="aboutBio">Bio goes here...</p>
+        <div class="about-interests" id="aboutInterests"></div>
+        <div class="about-actions">
+          <a href="#contact" class="btn-primary">Get In Touch</a>
+          <a href="#" class="btn-outline" id="aboutCvBtn">📄 Download CV (.doc)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SKILLS
+══════════════════════════════════ -->
+<section class="section section-alt" id="skills">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">What I Know</span>
+      <h2>My <span>Skills</span></h2>
+    </div>
+    <div class="skills-wrapper" id="skillsWrapper"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROJECTS
+══════════════════════════════════ -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">My Work</span>
+      <h2>Featured <span>Projects</span></h2>
+    </div>
+    <div class="filter-tabs" id="projectTabs">
+      <button class="ftab active" data-filter="all">All</button>
+      <button class="ftab" data-filter="web">Web</button>
+      <button class="ftab" data-filter="mobile">Mobile</button>
+      <button class="ftab" data-filter="ui">UI/UX</button>
+    </div>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════ -->
+<section class="section section-alt" id="experience">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">My Journey</span>
+      <h2>Work <span>Experience</span></h2>
+    </div>
+    <div class="timeline" id="experienceTimeline"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     EDUCATION
+══════════════════════════════════ -->
+<section class="section" id="education">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">My Background</span>
+      <h2>Education &amp; <span>Certifications</span></h2>
+    </div>
+    <div class="education-grid" id="educationGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════ -->
+<section class="section section-alt" id="testimonials">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">Kind Words</span>
+      <h2>What People <span>Say</span></h2>
+    </div>
+    <div class="testimonials-slider" id="testimonialsSlider"></div>
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-title">
+      <span class="section-tag">Let's Talk</span>
+      <h2>Get In <span>Touch</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Let's work together</h3>
+        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.</p>
+        <div class="contact-items" id="contactItems"></div>
+        <div class="contact-socials" id="contactSocials"></div>
+      </div>
+      <form class="contact-form reveal" id="contactForm" onsubmit="handleContactForm(event)">
+
+        <!-- Row 1: Name + Email side by side -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="cfName" placeholder="John Doe" required/>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="cfEmail" placeholder="john@email.com" required/>
+          </div>
+        </div>
+
+        <!-- Subject dropdown -->
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="cfSubject" onchange="handleSubjectChange(this.value)">
+            <option value="">— Select a subject —</option>
+            <option value="Project Inquiry">💼 Project Inquiry</option>
+            <option value="Freelance Collaboration">🤝 Freelance Collaboration</option>
+            <option value="Job Opportunity">🚀 Job Opportunity</option>
+            <option value="Feedback on Portfolio">⭐ Feedback on Portfolio</option>
+            <option value="General Question">💬 General Question</option>
+            <option value="other">✏️ Other (type your own)</option>
+          </select>
+        </div>
+
+        <!-- Custom subject (shown only when "Other" is selected) -->
+        <div class="form-group" id="cfSubjectOtherWrap" style="display:none;">
+          <label>Your Subject</label>
+          <input type="text" id="cfSubjectOther" placeholder="e.g. Speaking invitation, Partnership…"/>
+        </div>
+
+        <!-- Message with starter template -->
+        <div class="form-group">
+          <label>
+            Message
+            <span class="msg-hint" id="msgHint"></span>
+          </label>
+          <textarea id="cfMessage" rows="6" placeholder="Select a subject above to get a helpful starter template, or write your message here…" required></textarea>
+        </div>
+
+        <!-- Remember me checkbox -->
+        <label class="remember-wrap">
+          <input type="checkbox" id="cfRemember" checked/>
+          <span>Remember my name &amp; email for next time</span>
+        </label>
+
+        <button type="submit" class="btn-primary btn-full">
+          <span id="cfBtnText">Send Message 🚀</span>
+        </button>
+        <p class="form-msg" id="formMsg"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <p id="footerName" class="footer-logo">Portfolio</p>
+      <p class="footer-copy">Designed & Built with ❤️ — <span id="footerYear"></span></p>
+      <a href="admin.html" class="footer-admin-link">⚙ Admin</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════
+     BACK TO TOP
+══════════════════════════════════ -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ══════════════════════════════════
+     TOAST
+══════════════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/portfolio.js"></script>
+</body>
+</html>

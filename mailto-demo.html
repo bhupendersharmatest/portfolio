@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mailto Demo — Contact Form Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #7C5CFC;
+      --accent:  #00D4AA;
+      --bg:      #0A0A14;
+      --bg2:     #12121F;
+      --bg3:     #1A1A2E;
+      --border:  rgba(255,255,255,0.08);
+      --text:    #E8E6F0;
+      --text2:   #9896B8;
+      --text3:   #5F5D80;
+      --success: #10B981;
+      --warning: #F59E0B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+    .demo-tag {
+      display: inline-block;
+      background: rgba(124,92,252,0.15);
+      border: 1px solid rgba(124,92,252,0.3);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 50px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #7C5CFC, #00D4AA);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .page-header p { color: var(--text2); font-size: 0.92rem; line-height: 1.7; }
+
+    /* ── DEMO LAYOUT ── */
+    .demo-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ── WHAT HAPPENS PANEL ── */
+    .how-it-works {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .how-it-works h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+    .flow-step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .flow-step:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-body { flex: 1; }
+    .step-title { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .step-desc  { font-size: 0.78rem; color: var(--text2); line-height: 1.6; }
+    .step-arrow {
+      text-align: center;
+      color: var(--text3);
+      font-size: 1.1rem;
+      margin: -10px 0 -10px 14px;
+    }
+
+    .pros-cons {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .pros-cons h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .pros h4 { color: var(--success); }
+    .cons h4 { color: #FF6B6B; }
+    .pros-cons li {
+      font-size: 0.78rem;
+      color: var(--text2);
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+      list-style: none;
+    }
+    .pros li::before { content: '✅'; position: absolute; left: 0; font-size: 0.7rem; }
+    .cons li::before { content: '⚠️'; position: absolute; left: 0; font-size: 0.7rem; }
+
+    /* ── DEMO FORM PANEL ── */
+    .demo-form-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .demo-form-header {
+      background: var(--bg3);
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .demo-form-header span {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text2);
+    }
+    .live-badge {
+      background: rgba(16,185,129,0.15);
+      border: 1px solid rgba(16,185,129,0.3);
+      color: var(--success);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.4; }
+    }
+    .demo-form-body { padding: 24px; }
+    .form-row { margin-bottom: 16px; }
+    .form-row label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 14px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(124,92,252,0.12);
+    }
+    .form-row-half {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .send-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--primary), #5B3FD9);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 4px;
+      box-shadow: 0 4px 20px rgba(124,92,252,0.35);
+    }
+    .send-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .send-btn:active { transform: translateY(0); }
+
+    /* ── MAILTO PREVIEW BOX ── */
+    .mailto-preview {
+      margin-top: 20px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .mailto-preview-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .mailto-field {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+    }
+    .mailto-label {
+      color: var(--text3);
+      font-weight: 600;
+      width: 56px;
+      flex-shrink: 0;
+    }
+    .mailto-value {
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 0.78rem;
+      word-break: break-all;
+    }
+    .mailto-url {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .mailto-url-label {
+      font-size: 0.7rem;
+      color: var(--text3);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+    }
+    .mailto-url-value {
+      font-size: 0.72rem;
+      color: var(--primary);
+      font-family: monospace;
+      word-break: break-all;
+      line-height: 1.7;
+      background: var(--bg2);
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── WHAT OPENS PANEL ── */
+    .what-opens {
+      grid-column: 1 / -1;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .what-opens h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .email-clients {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .client-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .client-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+    .client-icon { font-size: 2.4rem; margin-bottom: 8px; }
+    .client-name { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .client-desc { font-size: 0.72rem; color: var(--text3); }
+    .client-works {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 50px;
+    }
+    .works-yes { background: rgba(16,185,129,0.12); color: var(--success); }
+    .works-maybe { background: rgba(245,158,11,0.12); color: var(--warning); }
+
+    /* ── COMPARISON NOTE ── */
+    .note-box {
+      grid-column: 1 / -1;
+      background: rgba(124,92,252,0.06);
+      border: 1px solid rgba(124,92,252,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .note-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .note-text { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+    .note-text strong { color: var(--text); }
+
+    /* ── DECISION BUTTONS ── */
+    .decision-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .decision-btn {
+      padding: 13px 32px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: default;
+      border: none;
+      transition: all 0.2s;
+    }
+    .decision-primary {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      box-shadow: 0 4px 20px rgba(124,92,252,0.35);
+    }
+    .decision-secondary {
+      background: transparent;
+      color: var(--text2);
+      border: 2px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .demo-layout { grid-template-columns: 1fr; }
+      .what-opens  { grid-column: 1; }
+      .note-box    { grid-column: 1; }
+      .decision-bar{ grid-column: 1; }
+      .email-clients { grid-template-columns: repeat(2,1fr); }
+      .pros-cons { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="demo-tag">Live Demo</div>
+  <h1>Mailto — Contact Form Demo</h1>
+  <p>Fill in the form below and click <strong>Send Message</strong> to see exactly what happens when a visitor contacts you via the <code>mailto:</code> approach.</p>
+</div>
+
+<div class="demo-layout">
+
+  <!-- ── HOW IT WORKS ── -->
+  <div class="how-it-works">
+    <h2>⚡ How It Works</h2>
+
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="step-title">Visitor fills the form</div>
+        <div class="step-desc">They enter their name, email, subject and message on your portfolio page.</div>
+      </div>
+    </div>
+    <div class="step-arrow">↓</div>
+
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="step-title">Click "Send Message"</div>
+        <div class="step-desc">The form data is collected and converted into a <code style="color:var(--accent);font-size:0.75rem;">mailto:</code> link with pre-filled content.</div>
+      </div>
+    </div>
+    <div class="step-arrow">↓</div>
+
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="step-title">Email app opens automatically</div>
+        <div class="step-desc">The visitor's default email client (Gmail, Outlook, Apple Mail) opens with everything pre-filled — To, Subject, and Message body.</div>
+      </div>
+    </div>
+    <div class="step-arrow">↓</div>
+
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <div class="step-title">Visitor clicks Send in their email app</div>
+        <div class="step-desc">The email is sent from <strong>their own email address</strong> directly to <strong>your inbox</strong>. You can reply directly to them.</div>
+      </div>
+    </div>
+
+    <!-- Pros & Cons -->
+    <div class="pros-cons">
+      <div class="pros">
+        <h4>Pros</h4>
+        <ul>
+          <li>Zero setup, no account</li>
+          <li>Works completely offline</li>
+          <li>Free, unlimited messages</li>
+          <li>Reply goes directly to sender</li>
+          <li>No API keys needed</li>
+        </ul>
+      </div>
+      <div class="cons">
+        <h4>Cons</h4>
+        <ul>
+          <li>Visitor needs email app installed</li>
+          <li>Desktop may not have default app set</li>
+          <li>Visitor must click Send themselves</li>
+          <li>No confirmation on portfolio page</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LIVE DEMO FORM ── -->
+  <div class="demo-form-wrap">
+    <div class="demo-form-header">
+      <span>Contact Form — Live Demo</span>
+      <div class="live-badge"><div class="live-dot"></div> Interactive</div>
+    </div>
+    <div class="demo-form-body">
+      <div class="form-row-half">
+        <div class="form-row">
+          <label>Your Name</label>
+          <input type="text" id="demoName" placeholder="John Doe" value="John Doe"/>
+        </div>
+        <div class="form-row">
+          <label>Your Email</label>
+          <input type="email" id="demoEmail" placeholder="john@email.com" value="john@email.com"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Subject</label>
+        <input type="text" id="demoSubject" placeholder="Project discussion" value="Project Inquiry — Portfolio"/>
+      </div>
+      <div class="form-row">
+        <label>Message</label>
+        <textarea id="demoMessage" rows="5" placeholder="Your message...">Hi, I came across your portfolio and I'm interested in working together on a project. Could we schedule a call to discuss further?</textarea>
+      </div>
+
+      <button class="send-btn" onclick="triggerMailto()">
+        📩 Send Message
+      </button>
+
+      <!-- Live mailto preview -->
+      <div class="mailto-preview">
+        <div class="mailto-preview-title">📋 Generated mailto: link preview</div>
+        <div class="mailto-field">
+          <span class="mailto-label">To:</span>
+          <span class="mailto-value" id="previewTo">your-email@gmail.com</span>
+        </div>
+        <div class="mailto-field">
+          <span class="mailto-label">Subject:</span>
+          <span class="mailto-value" id="previewSubject">Project Inquiry — Portfolio</span>
+        </div>
+        <div class="mailto-field">
+          <span class="mailto-label">From:</span>
+          <span class="mailto-value" id="previewFrom">John Doe (john@email.com)</span>
+        </div>
+        <div class="mailto-field">
+          <span class="mailto-label">Body:</span>
+          <span class="mailto-value" id="previewBody">Hi, I came across your portfolio...</span>
+        </div>
+        <div class="mailto-url">
+          <div class="mailto-url-label">Full mailto: URL (auto-generated)</div>
+          <div class="mailto-url-value" id="previewUrl">mailto:your@email.com?subject=...&body=...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WHAT OPENS ON DIFFERENT DEVICES ── -->
+  <div class="what-opens">
+    <h2>📱 What Opens on Each Device / Email App</h2>
+    <div class="email-clients">
+      <div class="client-card">
+        <div class="client-icon">📱</div>
+        <div class="client-name">iPhone / iOS</div>
+        <div class="client-desc">Opens Apple Mail app with everything pre-filled</div>
+        <div class="client-works works-yes">✅ Always works</div>
+      </div>
+      <div class="client-card">
+        <div class="client-icon">🤖</div>
+        <div class="client-name">Android</div>
+        <div class="client-desc">Opens Gmail or default mail app pre-filled</div>
+        <div class="client-works works-yes">✅ Always works</div>
+      </div>
+      <div class="client-card">
+        <div class="client-icon">🖥</div>
+        <div class="client-name">Windows PC</div>
+        <div class="client-desc">Opens Outlook or default email client if configured</div>
+        <div class="client-works works-maybe">⚠️ Depends on setup</div>
+      </div>
+      <div class="client-card">
+        <div class="client-icon">🍎</div>
+        <div class="client-name">Mac</div>
+        <div class="client-desc">Opens Apple Mail app pre-filled</div>
+        <div class="client-works works-yes">✅ Always works</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NOTE ── -->
+  <div class="note-box">
+    <div class="note-icon">💡</div>
+    <div class="note-text">
+      <strong>Key difference from EmailJS:</strong> With <code style="color:var(--accent);">mailto:</code>, the email is sent <strong>from the visitor's own email account</strong> — not from a server. This means you can reply directly to them. However, visitors on a desktop PC without a configured email client (like Outlook) may see nothing happen when they click Send. On <strong>all mobile phones and Macs, it always works perfectly</strong>.
+    </div>
+  </div>
+
+  <!-- ── DECISION ── -->
+  <div class="decision-bar">
+    <div class="decision-btn decision-primary">✅ I like it — Implement mailto</div>
+    <div class="decision-btn decision-secondary">🔄 Switch to Web3Forms instead</div>
+    <div class="decision-btn decision-secondary">📧 Keep EmailJS (create account)</div>
+  </div>
+
+</div>
+
+<script>
+  // Live update preview as user types
+  function updatePreview() {
+    const name    = document.getElementById('demoName').value    || 'Visitor Name';
+    const email   = document.getElementById('demoEmail').value   || 'visitor@email.com';
+    const subject = document.getElementById('demoSubject').value || 'Message from Portfolio';
+    const message = document.getElementById('demoMessage').value || '';
+
+    const yourEmail = 'your-email@gmail.com';
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const url  = `mailto:${yourEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    document.getElementById('previewTo').textContent      = yourEmail;
+    document.getElementById('previewSubject').textContent = subject;
+    document.getElementById('previewFrom').textContent    = `${name} (${email})`;
+    document.getElementById('previewBody').textContent    = message.slice(0, 60) + (message.length > 60 ? '…' : '');
+    document.getElementById('previewUrl').textContent     = url.slice(0, 120) + (url.length > 120 ? '…' : '');
+  }
+
+  // Trigger the actual mailto
+  function triggerMailto() {
+    const name    = document.getElementById('demoName').value    || 'Visitor Name';
+    const email   = document.getElementById('demoEmail').value   || 'visitor@email.com';
+    const subject = document.getElementById('demoSubject').value || 'Message from Portfolio';
+    const message = document.getElementById('demoMessage').value || '';
+
+    const yourEmail = 'your-email@gmail.com';
+    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+    const url  = `mailto:${yourEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = url;
+  }
+
+  // Attach live listeners
+  ['demoName','demoEmail','demoSubject','demoMessage'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updatePreview);
+  });
+
+  // Init preview on load
+  updatePreview();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,154 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "title": "Full Stack Developer",
+    "roles": ["Full Stack Developer", "UI/UX Designer", "Freelancer", "Problem Solver"],
+    "bio": "I'm a passionate developer who loves building beautiful, functional web experiences. I specialize in modern JavaScript frameworks and clean, scalable code.",
+    "photo": "",
+    "email": "you@email.com",
+    "phone": "+91 98765 43210",
+    "location": "Mumbai, India",
+    "cv": "",
+    "social": {
+      "github": "https://github.com",
+      "linkedin": "https://linkedin.com",
+      "twitter": "https://twitter.com",
+      "instagram": ""
+    },
+    "stats": {
+      "projects": "20+",
+      "experience": "3 Yrs",
+      "clients": "15+"
+    }
+  },
+  "skills": [
+    { "id": "s1", "name": "HTML5",      "category": "Frontend",  "level": 95 },
+    { "id": "s2", "name": "CSS3",       "category": "Frontend",  "level": 90 },
+    { "id": "s3", "name": "JavaScript", "category": "Frontend",  "level": 88 },
+    { "id": "s4", "name": "React.js",   "category": "Frontend",  "level": 85 },
+    { "id": "s5", "name": "Node.js",    "category": "Backend",   "level": 80 },
+    { "id": "s6", "name": "Python",     "category": "Backend",   "level": 75 },
+    { "id": "s7", "name": "MongoDB",    "category": "Backend",   "level": 78 },
+    { "id": "s8", "name": "SQL",        "category": "Backend",   "level": 72 },
+    { "id": "s9", "name": "Git",        "category": "Tools",     "level": 90 },
+    { "id":"s10", "name": "Figma",      "category": "Tools",     "level": 80 },
+    { "id":"s11", "name": "Docker",     "category": "Tools",     "level": 65 },
+    { "id":"s12", "name": "AWS",        "category": "Tools",     "level": 60 }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "title": "E-Commerce Platform",
+      "description": "A full-stack shopping platform with cart, payments, and admin dashboard.",
+      "image": "",
+      "tags": ["React", "Node.js", "MongoDB"],
+      "category": "web",
+      "github": "https://github.com",
+      "live": "https://example.com",
+      "featured": true
+    },
+    {
+      "id": "p2",
+      "title": "Portfolio CMS",
+      "description": "A dynamic portfolio builder with admin panel and theme customization.",
+      "image": "",
+      "tags": ["HTML", "CSS", "JavaScript"],
+      "category": "web",
+      "github": "https://github.com",
+      "live": "",
+      "featured": true
+    },
+    {
+      "id": "p3",
+      "title": "Task Manager App",
+      "description": "A productivity app with drag-and-drop boards, labels, and team collaboration.",
+      "image": "",
+      "tags": ["React", "Firebase"],
+      "category": "web",
+      "github": "https://github.com",
+      "live": "https://example.com",
+      "featured": false
+    }
+  ],
+  "experience": [
+    {
+      "id": "e1",
+      "company": "Tech Corp Pvt Ltd",
+      "role": "Senior Frontend Developer",
+      "duration": "Jan 2023 – Present",
+      "location": "Mumbai, India",
+      "type": "Full-time",
+      "bullets": [
+        "Led development of 5 major client projects using React and TypeScript",
+        "Improved page load performance by 40% through code splitting",
+        "Mentored 3 junior developers in best practices"
+      ]
+    },
+    {
+      "id": "e2",
+      "company": "StartupXYZ",
+      "role": "Full Stack Developer",
+      "duration": "Jun 2021 – Dec 2022",
+      "location": "Remote",
+      "type": "Full-time",
+      "bullets": [
+        "Built REST APIs with Node.js serving 10k+ daily users",
+        "Designed and implemented MongoDB database schemas",
+        "Collaborated with design team using Figma"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "ed1",
+      "institution": "University of Mumbai",
+      "degree": "B.E. in Computer Engineering",
+      "year": "2018 – 2022",
+      "grade": "8.5 CGPA",
+      "icon": "🎓"
+    },
+    {
+      "id": "ed2",
+      "institution": "Delhi Public School",
+      "degree": "Higher Secondary (Science)",
+      "year": "2016 – 2018",
+      "grade": "92%",
+      "icon": "🏫"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Rahul Sharma",
+      "role": "Product Manager, TechCorp",
+      "avatar": "",
+      "quote": "Exceptional work quality and always delivers on time. One of the best developers I've worked with.",
+      "rating": 5
+    },
+    {
+      "id": "t2",
+      "name": "Priya Mehta",
+      "role": "CEO, StartupXYZ",
+      "avatar": "",
+      "quote": "Transformed our entire frontend. The attention to detail and code quality is outstanding.",
+      "rating": 5
+    },
+    {
+      "id": "t3",
+      "name": "Amit Patel",
+      "role": "Freelance Client",
+      "avatar": "",
+      "quote": "Highly professional, communicates well, and delivers pixel-perfect designs. Highly recommended!",
+      "rating": 5
+    }
+  ],
+  "theme": {
+    "primaryColor": "#7C5CFC",
+    "accentColor": "#00D4AA",
+    "bgColor": "#0A0A14",
+    "fontFamily": "Inter",
+    "defaultMode": "dark",
+    "animationStyle": "smooth",
+    "heroLayout": "split"
+  }
+}

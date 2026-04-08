@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Portfolio</title>
+  <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════ -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">⚙</div>
+    <h1>Admin Panel</h1>
+    <p>Enter your password to manage your portfolio</p>
+    <form onsubmit="handleLogin(event)" class="login-form">
+      <div class="lf-group">
+        <label>Password</label>
+        <div class="pass-wrap">
+          <input type="password" id="loginPass" placeholder="Enter password" autofocus required/>
+          <button type="button" class="pass-eye" onclick="togglePassVis()">👁</button>
+        </div>
+      </div>
+      <p class="login-error" id="loginError"></p>
+      <button type="submit" class="btn-login" id="loginBtn">Login →</button>
+    </form>
+    <p class="login-hint">Default password: <code>admin123</code></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ADMIN APP
+══════════════════════════════════ -->
+<div class="admin-app" id="adminApp" style="display:none">
+
+  <!-- TOPBAR -->
+  <header class="admin-topbar">
+    <div class="admin-brand">
+      <span class="admin-logo">⚙</span>
+      <span>Portfolio Admin</span>
+    </div>
+    <div class="admin-topbar-actions">
+      <button class="tb-btn" onclick="window.open('index.html','_blank')" title="View Portfolio">👁 View Portfolio</button>
+      <button class="tb-btn" onclick="exportData()" title="Export JSON">📤 Export</button>
+      <label class="tb-btn" title="Import JSON">
+        📥 Import
+        <input type="file" accept=".json" onchange="handleImport(event)" style="display:none"/>
+      </label>
+      <button class="tb-btn tb-danger" onclick="handleLogout()">🔓 Logout</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <nav class="sidebar-nav">
+        <button class="snav-btn active" data-section="profile"      onclick="switchSection('profile',this)">👤 Profile</button>
+        <button class="snav-btn"        data-section="skills"       onclick="switchSection('skills',this)">🛠 Skills</button>
+        <button class="snav-btn"        data-section="projects"     onclick="switchSection('projects',this)">💼 Projects</button>
+        <button class="snav-btn"        data-section="experience"   onclick="switchSection('experience',this)">🏢 Experience</button>
+        <button class="snav-btn"        data-section="education"    onclick="switchSection('education',this)">🎓 Education</button>
+        <button class="snav-btn"        data-section="testimonials" onclick="switchSection('testimonials',this)">💬 Testimonials</button>
+        <button class="snav-btn"        data-section="contact"      onclick="switchSection('contact',this)">📞 Contact</button>
+        <button class="snav-btn"        data-section="theme"        onclick="switchSection('theme',this)">🎨 Theme</button>
+        <button class="snav-btn"        data-section="security"     onclick="switchSection('security',this)">🔐 Security</button>
+      </nav>
+    </aside>
+
+    <!-- MAIN PANEL -->
+    <main class="admin-main" id="adminMain">
+
+      <!-- ── PROFILE ── -->
+      <div class="panel" id="panel-profile">
+        <div class="panel-header"><h2>👤 Profile</h2><p>Your personal information shown on the portfolio</p></div>
+        <div class="form-grid">
+          <div class="fg-full"><label>Full Name</label><input type="text" id="pf-name" placeholder="John Doe"/></div>
+          <div class="fg-half"><label>Professional Title</label><input type="text" id="pf-title" placeholder="Full Stack Developer"/></div>
+          <div class="fg-full">
+            <label>CV / Resume <small>— Upload a PDF/DOC file <strong>or</strong> paste an external URL</small></label>
+            <div class="cv-upload-wrap">
+              <label class="cv-upload-btn" for="pf-cv-file">
+                📎 Upload File
+                <input type="file" id="pf-cv-file" accept=".pdf,.doc,.docx" style="display:none" onchange="handleCvUpload(event)"/>
+              </label>
+              <input type="text" id="pf-cv" placeholder="https://drive.google.com/... or auto-filled after upload"/>
+              <button type="button" class="cv-clear-btn" onclick="clearCv()" title="Remove CV">✕</button>
+            </div>
+            <p class="cv-status" id="cvStatus"></p>
+          </div>
+          <div class="fg-full"><label>Bio / About</label><textarea id="pf-bio" rows="4" placeholder="Write a short bio about yourself..."></textarea></div>
+          <div class="fg-full"><label>Profile Photo URL <small>(or paste a base64 image)</small></label><input type="text" id="pf-photo" placeholder="https://example.com/photo.jpg"/></div>
+          <div class="fg-full">
+            <label>Typewriter Roles <small>(one per line)</small></label>
+            <textarea id="pf-roles" rows="4" placeholder="Full Stack Developer&#10;UI/UX Designer&#10;Freelancer"></textarea>
+          </div>
+          <div class="fg-full">
+            <label>Interests / Hobbies <small>(comma separated)</small></label>
+            <input type="text" id="pf-interests" placeholder="Open Source, Gaming, Photography, Hiking"/>
+          </div>
+          <div class="fg-third"><label>Projects Count</label><input type="text" id="pf-stat-projects" placeholder="20+"/></div>
+          <div class="fg-third"><label>Experience</label><input type="text" id="pf-stat-experience" placeholder="3 Yrs"/></div>
+          <div class="fg-third"><label>Clients</label><input type="text" id="pf-stat-clients" placeholder="15+"/></div>
+          <div class="fg-full"><div class="section-divider">Social Links</div></div>
+          <div class="fg-half"><label>GitHub URL</label><input type="url" id="pf-github" placeholder="https://github.com/username"/></div>
+          <div class="fg-half"><label>LinkedIn URL</label><input type="url" id="pf-linkedin" placeholder="https://linkedin.com/in/username"/></div>
+          <div class="fg-half"><label>Twitter / X URL</label><input type="url" id="pf-twitter" placeholder="https://twitter.com/username"/></div>
+          <div class="fg-half"><label>Instagram URL</label><input type="url" id="pf-instagram" placeholder="https://instagram.com/username"/></div>
+        </div>
+        <div class="panel-footer"><button class="btn-save" onclick="saveProfilePanel()">💾 Save Profile</button></div>
+      </div>
+
+      <!-- ── SKILLS ── -->
+      <div class="panel" id="panel-skills" style="display:none">
+        <div class="panel-header">
+          <h2>🛠 Skills</h2>
+          <button class="btn-add" onclick="openSkillModal()">+ Add Skill</button>
+        </div>
+        <div class="items-list" id="skillsList"></div>
+      </div>
+
+      <!-- ── PROJECTS ── -->
+      <div class="panel" id="panel-projects" style="display:none">
+        <div class="panel-header">
+          <h2>💼 Projects</h2>
+          <button class="btn-add" onclick="openProjectModal()">+ Add Project</button>
+        </div>
+        <div class="items-list" id="projectsList"></div>
+      </div>
+
+      <!-- ── EXPERIENCE ── -->
+      <div class="panel" id="panel-experience" style="display:none">
+        <div class="panel-header">
+          <h2>🏢 Experience</h2>
+          <button class="btn-add" onclick="openExpModal()">+ Add Experience</button>
+        </div>
+        <div class="items-list" id="experienceList"></div>
+      </div>
+
+      <!-- ── EDUCATION ── -->
+      <div class="panel" id="panel-education" style="display:none">
+        <div class="panel-header">
+          <h2>🎓 Education</h2>
+          <button class="btn-add" onclick="openEduModal()">+ Add Education</button>
+        </div>
+        <div class="items-list" id="educationList"></div>
+      </div>
+
+      <!-- ── TESTIMONIALS ── -->
+      <div class="panel" id="panel-testimonials" style="display:none">
+        <div class="panel-header">
+          <h2>💬 Testimonials</h2>
+          <button class="btn-add" onclick="openTestModal()">+ Add Testimonial</button>
+        </div>
+        <div class="items-list" id="testimonialsList"></div>
+      </div>
+
+      <!-- ── CONTACT ── -->
+      <div class="panel" id="panel-contact" style="display:none">
+        <div class="panel-header"><h2>📞 Contact Info</h2><p>Your contact details on the portfolio</p></div>
+        <div class="form-grid">
+          <div class="fg-half"><label>Email</label><input type="email" id="ct-email" placeholder="you@email.com"/></div>
+          <div class="fg-half"><label>Phone</label><input type="text" id="ct-phone" placeholder="+91 98765 43210"/></div>
+          <div class="fg-full"><label>Location</label><input type="text" id="ct-location" placeholder="Mumbai, India"/></div>
+        </div>
+
+        <!-- EmailJS Config -->
+        <div class="emailjs-config">
+          <div class="emailjs-header">
+            <div class="emailjs-logo">✉</div>
+            <div>
+              <h3>EmailJS Configuration</h3>
+              <p>Connect EmailJS so visitors can actually send you messages. <a href="https://www.emailjs.com" target="_blank" rel="noopener">Get free keys at emailjs.com →</a></p>
+            </div>
+            <div class="emailjs-status" id="ejStatus">
+              <span class="ej-dot" id="ejDot"></span>
+              <span id="ejStatusText">Not configured</span>
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-top:16px;">
+            <div class="fg-full">
+              <label>Public Key <small>(Account → API Keys → Public Key)</small></label>
+              <input type="text" id="ej-public-key" placeholder="e.g. user_xxxxxxxxxxxxxxxxxxx"/>
+            </div>
+            <div class="fg-half">
+              <label>Service ID <small>(Email Services → Service ID)</small></label>
+              <input type="text" id="ej-service-id" placeholder="e.g. service_xxxxxxx"/>
+            </div>
+            <div class="fg-half">
+              <label>Template ID <small>(Email Templates → Template ID)</small></label>
+              <input type="text" id="ej-template-id" placeholder="e.g. template_xxxxxxx"/>
+            </div>
+          </div>
+
+          <div class="ej-steps">
+            <p class="ej-steps-title">📋 How to get these keys (3 steps):</p>
+            <ol>
+              <li>Go to <strong>emailjs.com</strong> → Sign up free → <strong>Add New Service</strong> → connect your Gmail/Outlook</li>
+              <li>Go to <strong>Email Templates</strong> → Create template → use these variable names in the template body:<br/>
+                <code>{{from_name}}</code> &nbsp;<code>{{from_email}}</code> &nbsp;<code>{{subject}}</code> &nbsp;<code>{{message}}</code> &nbsp;<code>{{to_name}}</code>
+              </li>
+              <li>Copy <strong>Public Key</strong> from Account → API Keys, and paste all 3 values above</li>
+            </ol>
+          </div>
+
+          <div class="panel-footer" style="margin-top:0;">
+            <button class="btn-save" onclick="saveContactPanel()">💾 Save All</button>
+            <button class="btn-outline-sm" onclick="testEmailJS()">🧪 Send Test Email</button>
+          </div>
+          <p class="ej-test-msg" id="ejTestMsg"></p>
+        </div>
+      </div>
+
+      <!-- ── THEME ── -->
+      <div class="panel" id="panel-theme" style="display:none">
+        <div class="panel-header"><h2>🎨 Theme Settings</h2><p>Customize your portfolio appearance</p></div>
+        <div class="theme-grid">
+          <div class="theme-card">
+            <h3>Colors</h3>
+            <div class="color-row">
+              <label>Primary Color</label>
+              <div class="color-pick-wrap">
+                <input type="color" id="th-primary" value="#7C5CFC"/>
+                <input type="text"  id="th-primary-hex" value="#7C5CFC" maxlength="7" placeholder="#7C5CFC"/>
+              </div>
+            </div>
+            <div class="color-row">
+              <label>Accent Color</label>
+              <div class="color-pick-wrap">
+                <input type="color" id="th-accent" value="#00D4AA"/>
+                <input type="text"  id="th-accent-hex" value="#00D4AA" maxlength="7" placeholder="#00D4AA"/>
+              </div>
+            </div>
+            <div class="color-row">
+              <label>Background Color</label>
+              <div class="color-pick-wrap">
+                <input type="color" id="th-bg" value="#0A0A14"/>
+                <input type="text"  id="th-bg-hex" value="#0A0A14" maxlength="7" placeholder="#0A0A14"/>
+              </div>
+            </div>
+            <div class="color-presets">
+              <p>Quick Presets:</p>
+              <div class="presets-row">
+                <button class="preset-btn" style="background:linear-gradient(135deg,#7C5CFC,#00D4AA)" onclick="applyPreset('#7C5CFC','#00D4AA','#0A0A14')" title="Violet + Mint">●</button>
+                <button class="preset-btn" style="background:linear-gradient(135deg,#FF6B35,#FFD700)" onclick="applyPreset('#FF6B35','#FFD700','#0F0A00')" title="Orange + Gold">●</button>
+                <button class="preset-btn" style="background:linear-gradient(135deg,#EC4899,#8B5CF6)" onclick="applyPreset('#EC4899','#8B5CF6','#0F0010')" title="Pink + Purple">●</button>
+                <button class="preset-btn" style="background:linear-gradient(135deg,#3B82F6,#06B6D4)" onclick="applyPreset('#3B82F6','#06B6D4','#00060F')" title="Blue + Cyan">●</button>
+                <button class="preset-btn" style="background:linear-gradient(135deg,#10B981,#84CC16)" onclick="applyPreset('#10B981','#84CC16','#001008')" title="Green + Lime">●</button>
+                <button class="preset-btn" style="background:linear-gradient(135deg,#F43F5E,#FB923C)" onclick="applyPreset('#F43F5E','#FB923C','#0F0005')" title="Red + Orange">●</button>
+              </div>
+            </div>
+          </div>
+          <div class="theme-card">
+            <h3>Typography & Layout</h3>
+            <div class="form-group-sm">
+              <label>Font Family</label>
+              <select id="th-font">
+                <option value="Inter">Inter — Clean & Modern</option>
+                <option value="Poppins">Poppins — Friendly & Round</option>
+                <option value="Space Grotesk">Space Grotesk — Techy</option>
+                <option value="Fira Code">Fira Code — Developer vibe</option>
+                <option value="Raleway">Raleway — Elegant</option>
+              </select>
+            </div>
+            <div class="form-group-sm">
+              <label>Default Color Mode</label>
+              <select id="th-mode">
+                <option value="dark">🌙 Dark Mode</option>
+                <option value="light">☀️ Light Mode</option>
+              </select>
+            </div>
+            <div class="form-group-sm">
+              <label>Animation Style</label>
+              <select id="th-anim">
+                <option value="smooth">Smooth (default)</option>
+                <option value="minimal">Minimal (no bounce)</option>
+                <option value="bouncy">Bouncy (spring)</option>
+              </select>
+            </div>
+            <div class="form-group-sm">
+              <label>Hero Layout</label>
+              <select id="th-hero">
+                <option value="split">Split — Text left, avatar right</option>
+                <option value="centered">Centered — Everything centered</option>
+              </select>
+            </div>
+          </div>
+          <div class="theme-card theme-preview-card">
+            <h3>Live Preview</h3>
+            <div class="theme-preview" id="themePreview">
+              <div class="tp-bar"></div>
+              <div class="tp-body">
+                <div class="tp-avatar"></div>
+                <div class="tp-lines">
+                  <div class="tp-line tp-name"></div>
+                  <div class="tp-line tp-sub"></div>
+                  <div class="tp-btn-row">
+                    <div class="tp-btn"></div>
+                    <div class="tp-btn tp-btn-out"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <button class="btn-save" onclick="saveThemePanel()">💾 Save Theme</button>
+          <button class="btn-outline-sm" onclick="resetThemeDefaults()">↺ Reset Defaults</button>
+        </div>
+      </div>
+
+      <!-- ── SECURITY ── -->
+      <div class="panel" id="panel-security" style="display:none">
+        <div class="panel-header"><h2>🔐 Security</h2><p>Change your admin password</p></div>
+        <div class="form-grid" style="max-width:480px">
+          <div class="fg-full"><label>New Password</label><input type="password" id="sec-pass1" placeholder="Enter new password"/></div>
+          <div class="fg-full"><label>Confirm Password</label><input type="password" id="sec-pass2" placeholder="Confirm new password"/></div>
+          <p class="sec-msg" id="secMsg"></p>
+        </div>
+        <div class="panel-footer"><button class="btn-save" onclick="savePassword()">🔐 Update Password</button></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODALS
+══════════════════════════════════ -->
+
+<!-- Skill Modal -->
+<div class="modal-overlay" id="skillModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="skillModalTitle">Add Skill</h3>
+      <button onclick="closeModal('skillModal')" class="modal-close">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg-half"><label>Skill Name</label><input type="text" id="sk-name" placeholder="React.js"/></div>
+      <div class="fg-half">
+        <label>Category</label>
+        <select id="sk-category">
+          <option>Frontend</option><option>Backend</option><option>Tools</option>
+          <option>Mobile</option><option>Database</option><option>Other</option>
+        </select>
+      </div>
+      <div class="fg-full">
+        <label>Proficiency: <strong id="skLevelVal">80</strong>%</label>
+        <input type="range" id="sk-level" min="1" max="100" value="80"
+               oninput="document.getElementById('skLevelVal').textContent=this.value"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="saveSkill()">Save Skill</button>
+      <button class="btn-cancel" onclick="closeModal('skillModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3 id="projectModalTitle">Add Project</h3>
+      <button onclick="closeModal('projectModal')" class="modal-close">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg-full"><label>Project Title</label><input type="text" id="pr-title" placeholder="My Awesome Project"/></div>
+      <div class="fg-full"><label>Description</label><textarea id="pr-desc" rows="3" placeholder="What does this project do?"></textarea></div>
+      <div class="fg-full"><label>Thumbnail Image URL <small>(optional)</small></label><input type="text" id="pr-image" placeholder="https://example.com/screenshot.png"/></div>
+      <div class="fg-half">
+        <label>Category</label>
+        <select id="pr-category">
+          <option value="web">Web</option><option value="mobile">Mobile</option>
+          <option value="ui">UI/UX</option><option value="other">Other</option>
+        </select>
+      </div>
+      <div class="fg-half">
+        <label>Featured?</label>
+        <select id="pr-featured"><option value="false">No</option><option value="true">Yes ⭐</option></select>
+      </div>
+      <div class="fg-full"><label>Tech Tags <small>(comma separated)</small></label><input type="text" id="pr-tags" placeholder="React, Node.js, MongoDB"/></div>
+      <div class="fg-half"><label>GitHub URL</label><input type="url" id="pr-github" placeholder="https://github.com/..."/></div>
+      <div class="fg-half"><label>Live Demo URL</label><input type="url" id="pr-live" placeholder="https://..."/></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="saveProject()">Save Project</button>
+      <button class="btn-cancel" onclick="closeModal('projectModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Experience Modal -->
+<div class="modal-overlay" id="expModal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h3 id="expModalTitle">Add Experience</h3>
+      <button onclick="closeModal('expModal')" class="modal-close">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg-half"><label>Company</label><input type="text" id="ex-company" placeholder="Google"/></div>
+      <div class="fg-half"><label>Role / Position</label><input type="text" id="ex-role" placeholder="Senior Developer"/></div>
+      <div class="fg-half"><label>Duration</label><input type="text" id="ex-duration" placeholder="Jan 2023 – Present"/></div>
+      <div class="fg-half"><label>Location</label><input type="text" id="ex-location" placeholder="Mumbai, India / Remote"/></div>
+      <div class="fg-half">
+        <label>Employment Type</label>
+        <select id="ex-type">
+          <option>Full-time</option><option>Part-time</option>
+          <option>Contract</option><option>Freelance</option><option>Internship</option>
+        </select>
+      </div>
+      <div class="fg-full">
+        <label>Key Responsibilities <small>(one per line)</small></label>
+        <textarea id="ex-bullets" rows="5" placeholder="Led a team of 5 developers&#10;Improved app performance by 40%&#10;Worked with React and Node.js"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="saveExperience()">Save Experience</button>
+      <button class="btn-cancel" onclick="closeModal('expModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Education Modal -->
+<div class="modal-overlay" id="eduModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="eduModalTitle">Add Education</h3>
+      <button onclick="closeModal('eduModal')" class="modal-close">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg-full"><label>Institution</label><input type="text" id="ed-institution" placeholder="University of Mumbai"/></div>
+      <div class="fg-full"><label>Degree / Course</label><input type="text" id="ed-degree" placeholder="B.E. in Computer Engineering"/></div>
+      <div class="fg-half"><label>Year</label><input type="text" id="ed-year" placeholder="2018 – 2022"/></div>
+      <div class="fg-half"><label>Grade / CGPA</label><input type="text" id="ed-grade" placeholder="8.5 CGPA"/></div>
+      <div class="fg-half"><label>Icon (emoji)</label><input type="text" id="ed-icon" placeholder="🎓" maxlength="4"/></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="saveEducation()">Save Education</button>
+      <button class="btn-cancel" onclick="closeModal('eduModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonial Modal -->
+<div class="modal-overlay" id="testModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="testModalTitle">Add Testimonial</h3>
+      <button onclick="closeModal('testModal')" class="modal-close">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg-half"><label>Name</label><input type="text" id="tm-name" placeholder="Rahul Sharma"/></div>
+      <div class="fg-half"><label>Role / Company</label><input type="text" id="tm-role" placeholder="CEO, Startup"/></div>
+      <div class="fg-full"><label>Avatar URL <small>(optional)</small></label><input type="url" id="tm-avatar" placeholder="https://..."/></div>
+      <div class="fg-full"><label>Testimonial Quote</label><textarea id="tm-quote" rows="4" placeholder="Write the testimonial here..."></textarea></div>
+      <div class="fg-full">
+        <label>Rating: <strong id="tmRatingVal">5</strong> ★</label>
+        <input type="range" id="tm-rating" min="1" max="5" value="5"
+               oninput="document.getElementById('tmRatingVal').textContent=this.value"/>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-save" onclick="saveTestimonial()">Save Testimonial</button>
+      <button class="btn-cancel" onclick="closeModal('testModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="adminToast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
